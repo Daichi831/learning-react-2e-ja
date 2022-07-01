@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 const useAnyKeyToRender = () => {
   const [, forceRender] = useState();
@@ -13,7 +13,7 @@ function WordCount({ children = "" }) {
   useAnyKeyToRender();
 
   // 毎回異なるインスタンスが生成される
-  const words = children.split(" ");
+  const words = useMemo(() => children.split(" "), [children]);
 
   useEffect(() => {
     console.log("fresh render");
